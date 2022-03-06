@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post("login",[UserController::class,'index']);
+
+Route::group(['middleware' => ['auth:sanctum']], function(){
+
+    Route::post("ticketcreate",[TicketController::class,'store']);
+    Route::post("ticketupdate/{id}",[TicketController::class,'update']);
+    
+
+}); 
+
+   
+    
+
+
+
+Route::get("list",[TicketController::class,'index']);
